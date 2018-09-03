@@ -7,6 +7,7 @@ public interface FolderParent extends FileSystemEntry {
     Iterator<Folder> iterateFolders() throws IOException;
 
     Folder getFolder(String folderName, EntryDoesNotExistBehavior missingBehavior) throws IOException;
+    Folder getFolderOrNull(String relativePath) throws IOException;
 
     boolean folderExists(String folderName);
 }

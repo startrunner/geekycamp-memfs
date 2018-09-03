@@ -10,6 +10,7 @@ public interface FileParent extends FileSystemEntry {
     Iterator<File> iterateFiles() throws IOException;
 
     File getFile(String name, EntryDoesNotExistBehavior notExistingBehavior) throws IOException;
+    File getFileOrNull(String relativePath) throws IOException;
 
     default File createFile(String name, String content) throws IOException {
         if (isDeleted()) throw new EntryDeletedException(getName());
