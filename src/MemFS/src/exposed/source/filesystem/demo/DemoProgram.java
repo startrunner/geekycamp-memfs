@@ -25,13 +25,12 @@ public class DemoProgram {
         System.out.println(peshoDll.getFullPath());
         System.out.println(peshoDll.readAllText());
 
-        File system1 = null;
+        ReadOnlyFile system1 = null;
 
-        system1 = system.getFileOrNull( "/windows/sYsTem32/file1");
+        system1 = system.getFileOrNull( "/windows/sYsTem32/file1").toReadOnly();
         System.out.println(system1.readAllText());
-        System.out.println(system1.getParent().getName());
 
-        system1 = dlls.getFileOrNull("/../file1");
+        system1 = dlls.getFileOrNull("/../file1").toReadOnly();
         System.out.println(system1.readAllText());
 
         print(system, 0);

@@ -2,10 +2,10 @@ package exposed.source.filesystem.contract;
 
 import java.io.IOException;
 
-public interface File extends FileSystemEntry {
-    String readAllText() throws IOException;
-
+public interface File extends FileSystemEntry, ReadOnlyFile {
     File writeAllText(String newText) throws IOException;
+
+    ReadOnlyFile toReadOnly() throws IOException;
 
     default FileParent getFileParent() throws IOException {
         return (FileParent) getParent();

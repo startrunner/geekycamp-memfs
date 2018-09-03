@@ -1,6 +1,7 @@
 package exposed.source.filesystem.inmemory;
 
 import exposed.source.filesystem.contract.File;
+import exposed.source.filesystem.contract.ReadOnlyFile;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -8,8 +9,22 @@ import java.util.Objects;
 public class RamFile extends RamFileSystemEntryBase implements File {
     private String text;
 
+    private class ReadOnlyHandle implements ReadOnlyFile {
+
+        @Override
+        public String readAllText() throws IOException {
+            return RamFile.this.readAllText();
+        }
+    }
+
     public RamFile(EntryObserver observer, RamFolderAndFileParentBase parent, String name) {
         super(observer, parent, name);
+    }
+
+    @Override
+    public ReadOnlyFile toReadOnly() throws IOException {
+        throwIfDeleted();
+        return  new ReadOnlyHandle();
     }
 
     @Override
