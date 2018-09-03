@@ -65,8 +65,12 @@ public abstract class RamFolderAndFileParentBase extends RamFileSystemEntryBase 
 
     @Override
     public void delete() throws IOException {
-        folders.entryIterator().forEachRemaining(RamFolderAndFileParentBase::deleteOrThrowRuntime);
-        files.entryIterator().forEachRemaining(RamFolderAndFileParentBase::deleteOrThrowRuntime);
+        List<Folder> folders = new ArrayList<>();
+        List<File> files = new ArrayList<>();
+        this.folders.entryIterator().forEachRemaining(x->folders.add(x));
+        this.files.entryIterator().forEachRemaining(x->files.add(x));
+        folders.iterator().forEachRemaining(RamFolderAndFileParentBase::deleteOrThrowRuntime);
+        files.iterator().forEachRemaining(RamFolderAndFileParentBase::deleteOrThrowRuntime);
         deleted = true;
         parent = null;
         observer.notifyDeleted(name);

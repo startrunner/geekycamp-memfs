@@ -1,8 +1,11 @@
 package exposed.source.filesystem.demo;
 
 import exposed.source.filesystem.contract.*;
+import exposed.source.filesystem.contract.exceptions.EntryDeletedException;
 import exposed.source.filesystem.contract.exceptions.FileDoesNotExistException;
 import exposed.source.filesystem.inmemory.RamFileSystem;
+
+import java.io.IOException;
 
 public class DemoProgram {
     public static void main(String[] args) throws Exception {
@@ -24,12 +27,21 @@ public class DemoProgram {
 
         File system1 = null;
 
-        system1 = system.getFileOrNull( "/windows/system32/file1");
+        system1 = system.getFileOrNull( "/windows/sYsTem32/file1");
         System.out.println(system1.readAllText());
+        System.out.println(system1.getParent().getName());
 
         system1 = dlls.getFileOrNull("/../file1");
         System.out.println(system1.readAllText());
 
+        print(system, 0);
+
+        system32Folder.delete();
+        try {
+            peshoDll.readAllText();
+            throw new RuntimeException("Should have thrown :)");
+        }
+        catch (EntryDeletedException e){}
 
         print(system, 0);
     }
