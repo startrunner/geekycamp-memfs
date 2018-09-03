@@ -16,7 +16,7 @@ public class EntryMap<TEntry extends FileSystemEntry> {
 
     private void handleRenamed(TEntry entry, String oldName, String newName) {
         map.remove(oldName);
-        map.put(oldName, entry);
+        map.put(newName, entry);
     }
 
     private void handleDeleted(TEntry entry, String name) {

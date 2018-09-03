@@ -1,6 +1,8 @@
 package exposed.source.filesystem.inmemory;
 
+import exposed.source.filesystem.contract.File;
 import exposed.source.filesystem.contract.FileSystem;
+import exposed.source.filesystem.contract.Folder;
 
 public class RamFileSystem extends RamFolderAndFileParentBase implements FileSystem {
     public RamFileSystem(String name) {
